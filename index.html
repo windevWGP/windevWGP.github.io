@@ -155,7 +155,7 @@
           <div class="col-md-6">
             <div class="alert alert-success alert-dismissible fade show d-none my-alert"
               role="alert">
-              <strong>Terimakasih</strong>Pesan anda sudah kami terima.
+              <strong>Terimakasih </strong>Pesan anda sudah kami terima.
               <button type="button" class="btn-close" data-bs-dismiss="alert"
                 aria-label="Close"></button>
             </div>
@@ -207,8 +207,8 @@
 
     <script>
         const scriptURL = 'https://script.google.com/macros/s/AKfycbwikwxb3NSbFtT1XgiS0Hio58mZLdyDCEUPdAYb_5JwxArVAkzEs7oh6bmrhFIaqj53/exec';
-        const form = document.forms['Portofolio contact form'];
-        const btnKirim = document.querySelector(',btn-kirim');
+        const form = document.forms['Portofolio contact send'];
+        const btnKirim = document.querySelector('.btn-kirim');
         const btnLoading = document.querySelector('.btn-loading');
         const myAlert = document.querySelector('.my-alert');
       
@@ -219,8 +219,17 @@
           btnLoading.classList.toggle('d-none');
           btnKirim.classList.toggle('d-none');
           fetch(scriptURL, { method: 'POST', body: new FormData(form)})
-            .then( (response) => console.log('Success!', response))
-            .catch( (error) => console.error('Error!', error.message))
+            .then((response) => {
+              // tampilan tombol kirim, hilangkan tombol loading
+          btnLoading.classList.toggle('d-none');
+          btnKirim.classList.toggle('d-none');
+              // tampikan alert
+          myAlert.classList.toggle('d-none');
+              // reset formnya
+          form.reset();
+          console.log('success!', response);
+          })
+            .catch((error) => console.error('Error!', error.message))
         });
       </script>
   </body>
